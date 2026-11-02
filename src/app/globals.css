@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* Breakpoints match the prototype's JS thresholds:
+   md = 760 (mobile → tablet), lg = 1100 (tablet → desktop), xl = 1180 (header burger → full nav) */
+@theme {
+  --breakpoint-md: 760px;
+  --breakpoint-lg: 1100px;
+  --breakpoint-xl: 1180px;
+
+  --color-ink: #000a0d;
+  --color-panel: #0c1b20;
+  --color-panel-hover: #122a31;
+  --color-stripe: #10232a;
+  --color-cream: #f0eae3;
+  --color-gold: #bf9e77;
+  --color-gold-light: #cdb08d;
+  --color-muted: #a9a39c;
+  --color-subtle: #8a9294;
+  --color-placeholder: #6f7a7c;
+  --color-online: #4cc38a;
+  --color-warm-gray: #5a5650;
+  --color-error: #e0907f;
+
+  --font-mono: ui-monospace, Menlo, monospace;
+
+  --animate-spin-slow: spin 26s linear infinite;
+  --animate-map-pulse: map-pulse 2.2s ease-out infinite;
+
+  @keyframes map-pulse {
+    from { opacity: 0.9; transform: rotate(45deg) scale(1); }
+    to { opacity: 0; transform: rotate(45deg) scale(1.9); }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-jost), sans-serif;
+  --font-serif: var(--font-cormorant), serif;
+  --font-script: var(--font-marck), cursive;
+}
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    background: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    line-height: normal;
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--color-gold);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-cream);
+  }
+  ::placeholder {
+    color: #7d8587;
+  }
+  select option {
+    background: var(--color-panel);
+    color: var(--color-cream);
+  }
+  ::-webkit-scrollbar {
+    height: 0;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  /* Striped "photo missing" placeholder shown under every image */
+  .ph-stripes {
+    background: repeating-linear-gradient(135deg, var(--color-panel) 0 12px, var(--color-stripe) 12px 24px);
+  }
+
+  /* "Лучшие предложения" bento grid */
+  .bento {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "a" "c" "b" "d" "e" "f" "g";
+    grid-auto-rows: 400px;
+  }
+  @media (min-width: 760px) {
+    .bento {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "a a" "c b" "c d" "e f" "g g";
+      grid-auto-rows: 340px;
+    }
+  }
+  @media (min-width: 1100px) {
+    .bento {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-areas: "a a c" "b d c" "e f g";
+    }
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
